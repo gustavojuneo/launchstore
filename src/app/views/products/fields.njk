@@ -44,7 +44,19 @@
       >
       <p>Selecione até 6 Fotos</p>
     </div>
-    <div id='photos-preview'></div>
+    <div id='photos-preview'>
+      {% if files %}
+        {% for image in files %}
+          <div class="photo" id="{{image.id}}" onclick="PhotosUpload.removeOldPhoto(event)">
+            <img src="{{image.src}}" alt="{{image.name}}">
+            <i class="material-icons">
+              close
+            </i>
+          </div>
+        {% endfor %}
+        <input type="hidden" name="removed_files">
+      {% endif %}
+    </div>
   </div>
 </div>
 
@@ -76,7 +88,7 @@
   </div>
 </div>
 
-{% if product.status %}
+{% if (product.status == '1') or (product.status == '0') %}
 <div class="item">
   <div>Disponível</div>
   <div>
